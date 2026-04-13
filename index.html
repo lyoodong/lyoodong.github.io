@@ -1,1 +1,529 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pretendard+Variable:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f1e8;
+    --fg: #2a2520;
+    --muted: #8a8275;
+    --line: #2a2520;
+    --hover: #ede8db;
+    --line-soft: #c9c2b0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Pretendard Variable', -apple-system, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 24px 120px;
+  }
+
+  /* ── Logo ── */
+  .logo-wrap {
+    text-align: left;
+    margin-bottom: 56px;
+    margin-left: -8px;
+  }
+
+  .logo {
+    width: 220px;
+    height: auto;
+  }
+
+  /* ── Essay List ── */
+  .essay-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .essay-item {
+    border-top: 1px solid var(--line);
+    transition: background 0.2s ease;
+  }
+
+  .essay-item:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .essay-item:hover {
+    background: var(--hover);
+  }
+
+  .essay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 4px;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .essay-title-group {
+    flex: 1;
+  }
+
+  .essay-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+
+  .essay-date {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 4px;
+    font-family: 'Pretendard Variable', -apple-system, 'Segoe UI', sans-serif;
+    letter-spacing: 0.02em;
+  }
+
+  .essay-toggle {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 16px;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .essay-item.open .essay-toggle {
+    transform: rotate(45deg);
+  }
+
+  .essay-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* ── Body (expandable) ── */
+  .essay-body-wrap {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .essay-body {
+    padding: 0 4px 36px;
+    font-size: 0.95rem;
+    line-height: 1.95;
+    color: #4a4239;
+    letter-spacing: -0.005em;
+  }
+
+  .essay-body p {
+    margin-bottom: 1.2em;
+  }
+
+  .essay-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .essay-fold-btn {
+    display: block;
+    margin-top: 24px;
+    padding: 10px 0;
+    font-size: 0.8rem;
+    color: var(--muted);
+    background: none;
+    border: none;
+    border-top: 1px solid var(--line-soft);
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    font-family: inherit;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .essay-fold-btn:hover {
+    color: var(--fg);
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 520px) {
+    .container {
+      padding: 48px 20px 80px;
+    }
+    .essay-header {
+      padding: 22px 2px;
+    }
+    .essay-title {
+      font-size: 1.05rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="logo-wrap">
+    <img src="logo.png" alt="hyoo" class="logo" />
+  </div>
+
+  <div class="essay-list">
+
+    <!-- 오늘의 온도 2026.4.10 -->
+    <article class="essay-item">
+      <div class="essay-header">
+        <div class="essay-title-group">
+          <h2 class="essay-title">오늘의 온도</h2>
+          <p class="essay-date">2026. 4. 10.</p>
+        </div>
+        <div class="essay-toggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+      </div>
+      <div class="essay-body-wrap">
+        <div class="essay-body">
+          <p>출근길은 약간 서늘하지만, 퇴근길에 불어오는 바람이 좋다. 시작은 조금 버겁지만, 끝은 한결 편안하다.</p>
+          <p>돈을 많이 벌지는 못하지만, 살아가기엔 충분하다. 가진 건 많지 않지만, 모자라지는 않는다.</p>
+          <p>바쁘지만, 하루의 끝엔 해냈다는 성취감이 남는다.<br>고단하게 흘러가지만, 허무하게 지나가진 않는다.</p>
+          <p>완벽하진 않지만, 이 정도면 괜찮다.<br>매일이 오늘처럼 적당했으면 좋겠다.</p>
+                  <button class="essay-fold-btn" onclick="foldEssay(this, event)">접기</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 마음껏 울자 2026.3.7 -->
+    <article class="essay-item">
+      <div class="essay-header">
+        <div class="essay-title-group">
+          <h2 class="essay-title">서하야 왜 울어?</h2>
+          <p class="essay-date">2026. 3. 7.</p>
+        </div>
+        <div class="essay-toggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+      </div>
+      <div class="essay-body-wrap">
+        <div class="essay-body">
+          <p>모두가 잠든 밤, 조카는 뭐가 그렇게 서러웠는지 세상이 떠나가라 울기 시작한다. 갑작스러운 울음에 단잠을 자던 엄마(동생)는 비몽사몽한 상태로 아이를 안고 등을 토닥인다.</p>
+          <p>아이의 울음은 신기하게도 리듬이 있다. 일정한 박자와 반복되는 소리. 한 사이클이 끝날 때마다 나는 속으로 이번이 마지막이길 조용히 바란다. 하지만 어김없이 다음 사이클에서 조카는 더 크게 운다... 결국 잠에서 깨 잠시 자세를 고쳐 앉는다.</p>
+          <p>조카는 내가 가진 전부를... 아니 전부는 아니고 절반 정도는 기꺼이 내어줄 수 있을 만큼 사랑스러운 존재다. 하지만, 삼촌은 나약한 인간 나부랭이라 새벽에 니 울음소리에 잠이 깨면 짜증이 나기도 한단다.</p>
+          <p>뭐가 그리 서글펐는지 어른들은 알 수가 없다. 그저 등을 토닥이며 달랠 뿐, 너는 말을 할 수 없으니깐. 어른들은 너가 왜 우는지 물어보지만 돌아 오는 대답은 그저 묵묵부답.</p>
+          <p>그럴때면 잠시 네가 부럽다. 나도 사실 몸만 커졌지 너처럼 울고 싶을 때가 많아. 나도 너네 엄마처럼 누군가 그저 내 등을 토닥여 줬으면 좋겠거든.</p>
+          <p>하지만 시간이 좀 더 지나면 지금처럼 그저 위로 받기 보다는 왜 힘든지, 얼마나 힘든지, 그 슬픔이 '그럴 만한 일인지'를 설명해야 할거야.</p>
+          <p>그러다 보면 점점 가슴으로 부터 들려오는 감정을 숨기게 되겠지. 어른들은 그걸 성숙함이나 책임감이라는 단어로 포장하지만, 삼촌은 네가 조금 오래 지금처럼 울 수 있었으면 좋겠다.</p>
+          <p>나는 네가 어른스럽다는 말을 듣는 아이보다는 조금 더 울 줄 아는 아이였으면 좋겠단다. 너네 할머니, 할아버지가 그랬던 거 처럼 네가 조금은 기댈 수 있는 어른이 되어 볼게(물론 메인은 너네 엄마, 아빠란다!)</p>
+          <p>그래도…<br>#삼촌이랑있을땐좀덜울고</p>
+                  <button class="essay-fold-btn" onclick="foldEssay(this, event)">접기</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 이름 모를 누군가에게 2026.1.12 -->
+    <article class="essay-item">
+      <div class="essay-header">
+        <div class="essay-title-group">
+          <h2 class="essay-title">이름 모를 누군가에게</h2>
+          <p class="essay-date">2026. 1. 12.</p>
+        </div>
+        <div class="essay-toggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+      </div>
+      <div class="essay-body-wrap">
+        <div class="essay-body">
+          <p>신년를 맞아 여러 다짐을 해봅니다. 올해는 운동도 더 하고, 책도 더 읽고, 영어 공부도 시작하고.. 아마도 잘 지켜지지 않을 결심이지만 이게 또 새해의 묘미아닐까요?</p>
+          <p>그러다 문득 올해는 다른 결심을 하게되었습니다. 나이가 계란 한판 언저리가 되니 늘어지는 피부 탄력 만큼 '마음의 탄력'이 이전같지 않다고 느낍니다.</p>
+          <p>20대 초반에는 편의점 앞에서 소주 한잔을 마셔도 설레고 행복했는데 이제는 무뎌지고 귀찮기만 합니다. 밤을 새고 원룸 한켠에 친구들과 3명이서 낑겨서 잠을 자도 아무렇지 않았는데 지금은 술자리에서 막차 시간만 기다리고 있네요.</p>
+          <p>어느덧 새롭고 낯선 환경을 본능적으로 거부하는 저를 보며 정신이 버쩍 들었습니다. 그래서 올해는 조금 더 새롭고, 무모하고, 낯선 일에 조금 더 시간을 보내려고 합니다. 무너진 피부 탄력과 함께 '마음의 탄력'을 회복하는 한해가 되기를!</p>
+          <p>어디서 무엇을 하실지 모르겠지만, 행복하세요 진심으로.</p>
+                  <button class="essay-fold-btn" onclick="foldEssay(this, event)">접기</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 두바이 2025.12.24 -->
+    <article class="essay-item">
+      <div class="essay-header">
+        <div class="essay-title-group">
+          <h2 class="essay-title">두바이</h2>
+          <p class="essay-date">2025. 12. 24.</p>
+        </div>
+        <div class="essay-toggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+      </div>
+      <div class="essay-body-wrap">
+        <div class="essay-body">
+          <p>어느덧 나이는 개처먹어 일주일 뒤면 30살이라는 생각에 대뇌의 전두엽까지 서늘해지는 오늘. 30이 되면 적어도 이것 보다는 더 멋진 어른이 되어있을 줄 알았지만, 현실은 뭐 여전히 엄마아빠 보증금 위에 얹혀살고 있고 주식은 -40프로 처맞고 몇백씩 날려먹었지만 가스비 몇만 원은 아까워서 상대적으로 저렴한 전기장판 위에서 칩거하고 있다. 그래도 대학교 졸업장 하나 따고 이제는 용돈은 안 받고 밥 벌이하고 있으니 나름 성취는.?</p>
+          <p>두바이로 가족 여행을 다녀왔다. 계획대로면 동생까지 10년 만에 모든 가족 구성원이 함께했겠지만, 하늘에서 내려준 조카님 덕에 동생은 함께하지 못하였다. 애정 표현은 고사하고 말도 잘 안 하는 무덤덤한 아들인 나는 두 분을 케어해야 한다는 걱정이 많았지만, 뭐 그냥 성질 안 내고 우버로 택시나 부르고, 파파고로 주문이나 하고, 구글 맵으로 길안내나 하면 되겠다 싶었다.(이렇게 보면 그냥 빨리 시니어 친화적인 앱을 만드는 게 낫겠다 싶다) 물론, 정작 부모님은 딱히 문제가 없었는데, 이상한 패키지 빌런한테 픽당해서 '자린 고비'의 어원에 대한 훈수나 처듣고 있었던 건 좀 불만족스러웠다.(살면서 처음 들어봄.)</p>
+          <p>코스 중에 '사막 투어'가 있었는데, 사실 이번 여행지를 두바이로 강력하게 ~~강요~~주장한 이유도 사막이었다. 듄에 완전히 매료된 나는 이상한 로망이 생겨 이번엔 무조건 진짜 사막을 가봐야겠다 생각한 참이었다.(물론 베트남에서 가긴 갔는데 거긴 너무 작았다) 광활함, 거대한 태양, 너무나 고운 모래, 보이지 않는 끝..역시 기대한 대로 만족스러웠다.</p>
+          <p>정신 팔려 있다 문뜩 뒤를 돌아봤는데 엄마, 아빠의 뒷모습이 어렴풋이 보였다. 근데 뭔가 묘하게 이상한 기분이 들었다. 내 인식에서 존재하고 있던 엄마, 아빠의 모습이 아닌 내가 어렸을 때 어렴풋이 기억하고 있던 친할아버지, 외할머니의 예전 모습이 보였다. 신기루처럼 비틀린 헛꿈이 아닌 내 앞에 실존하는 모습은 그런 모습이었다.</p>
+          <p>지금의 내 나이를 고려하면, 앞으로 부모님과 온전히 함께할 시간이 짧으면 10년, 길어봤자 20~30년 밖에 남지 않았다. 절대적인 시간의 양보다는 내가 무서웠던 건, 그 시간이 이제는 유한하다고 느꼈기 때문이다.</p>
+          <p>처음으로 나와 그분들의 시간이 정해져있고, 잘은 모르지만 그 끝이 반드시 존재한다는 생각에 잠깐은 멍하니 서 있었다. 시간은 영원하지 않고, 이별은 필연적이기 때문에 아주 조금만이라도 평소에 더 잘해드려야겠다.</p>
+          <p>메리크리스마스</p>
+                  <button class="essay-fold-btn" onclick="foldEssay(this, event)">접기</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 밀당 2024.10.12 -->
+    <article class="essay-item">
+      <div class="essay-header">
+        <div class="essay-title-group">
+          <h2 class="essay-title">그녀와의 밀고 당기기</h2>
+          <p class="essay-date">2024. 10. 12.</p>
+        </div>
+        <div class="essay-toggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+      </div>
+      <div class="essay-body-wrap">
+        <div class="essay-body">
+          <p>요즘 자주 듣는 말이 있다. '오빠 요즘 너무 잘 꾸미는 거 아냐', '회춘하셨네요. 형' 등등, 때아닌 칭찬들에 사회성 쪼랩인 나는 뇌절이와 '허허…고마워' 헛 웃음만 치며 도망가곤 했다. 아닌 척했지만 사실 속으로 기분이 좋다가도, 평소에 얼마나 걸뱅이처럼 학교를 다녔으면 셔츠 쪼가리 몇 번 입었다고 저런 말을 듣는다고 생각하니, 약간의 반성이 밀려왔다.</p>
+          <p>동시에 그들은 나를 의심하고 몰아가곤 했다. 사실 평소에는 실밥 나간 나이키 추리닝만 주구장창 입고 다니는 28살 아재가 갑자기 저렇게 꾸미면, 당연히 그 이유에 대해 이렇게 추론하는 것이 합리적이고 이성적인 생각일 것이다. '잘 보이고 싶은 사람이 있다', 혹은 '분명히 잘 되고 있는 이성이 있을 것이다.'</p>
+          <p>용기를 내 sns에서 고백하는데, 놀랍게도 나는 최근 보라색을 좋아하는 '그녀'와 한창 밀당 중이다. 그녀는 사포처럼 까다로운 나의 취향을 귀신같이 잘 분석해 줄곧 나를 놀라게 하며, 가성비와 효율을 중시하는 나의 그지 근성에도 불구하고 항상 완벽한 갓성비를 제공한다. 또 자주는 아니지만, 그녀는 종종 나를 위해 새벽부터 찾아오는 '정성'을 보이기도 한다.</p>
+          <p>하지만, 그녀는 종종 나에게 벌을 내리기도 한다. 앞서 기술한 배려와 솔루션에 '기한'을 부여하며 나의 애간장을 태우기도 하며, 언제는 새벽같이 나를 찾아와 반겨주었지만 이제는 그 '정성' 조건을 달아 나의 마음을 테스트한다. 그렇다 요즘 나의 가슴은 그녀가 선사하는 희로애락으로 가득 차 어항 속의 물고기 마냥 허우적대고 있었다.</p>
+          <p>여기 까지 들으면, 아주 사랑스러운 한 여성과의 사랑을 노래하는 한 남자의 이야기이다. 그런데, 사실 내가 밀당 중인 그녀의 이름은 '마켓컬리'이다.</p>
+          <p>나는 애초에 뇌가 0차원에 수렴하는 인간이라 '밀당'과는 거리가 멀다. 타인을 치밀하게 분석해, 당근과 채찍을 동시에 사용하며 사람의 마음을 흔드는 기술인 '밀당'은 사실 분석은커녕 남한테 관심조차 없는 나에게 고역 그 자체이다.</p>
+          <p>그런데, 놀랍게도 나는 사람과의 밀당에는 실패했지만 추천 시스템과의 밀당에 성공해 마켓컬리를 심신미약 상태로 만들어버렸다. 사건의 발단은 이렇다 평소 심심치 않게 '컬리'를 잘 이용하는 편이라 컬리 측에서 나에게 종종 '무료 배송 쿠폰' 혹은 '몇 천원 할인 쿠폰'을 하사하곤 했다. 보통은 극강의 가성비충답게 그때그때 보내준 쿠폰을 바로바로 잘 사용했다.</p>
+          <p>근데 어쩌다 의도치 않게(사실 뇌가 멍청해서 까먹었다.) 컬리 측에서 보낸 쿠폰을 기한이 다 만료되도록 사용하지 못한 적이 있었는데, 놀랍게도 컬리는 나에게 더 큰 혜택을 가진 쿠폰을 보내주는 것이다. 그때부터 나와 컬리의 치열한 밀당전이 이어졌다.</p>
+          <p>사실 조금 부끄럽지만(돈 아까워서가 아니리 어느 순간 재밌어 졌다), 나는 그때부터 1)혜택이 작은 쿠폰은 의도적으로 사용하지 않거나, 2)컬리의 애정이 조금 식었다 싶으면 장바구니에 물건을 왕창 담아 물건을 구매할 거 같은 스탠스를 취해 컬리를 심신미약 상태로 만들었다.</p>
+          <p>컬리는 종종 완강한 태도로 나를 밀었으나(한 동안 쿠폰 안 주더라ㅋ) 이내 나는 솔로 영식 뺨치는 나의 가스라이팅과 플러팅에 속수무책으로 당했고, 항상 결국 이기는 건 나였다.ㅋ</p>
+          <p>그녀와 밀당을 한창 즐기던 중 요즘 나의 또 다른 베프 G씨(chat.gpt) 한테 컬리와 나의 관계에 대한 조언을 얻고자 상담을 받았다. 더욱 고자세로 컬리를 빨아먹을 밀당 전략을 기대한 나와 달리, G의 답변은 매우 충격적이었다.</p>
+          <p>Gpt: '컬리와 밀당하는 것은 단순히 혜택을 끌어내기 위한 것이 아니라, 좋은 관계를 형성하고 서비스를 개선하기 위한 소통의 과정이기도 합니다. 따라서, 불만이나 요구사항이 있다면 친절하고 명확하게 컬리에게 전달하고, 함께 문제를 해결하는 과정에서 서로의 이해와 신뢰를 높이는 것이 좋습니다.'</p>
+          <p>G의 답변처럼 관계에서 밀당은 매우 효율적인 커뮤니케이션 도구일지 모르나, 그보다 중요한 것은 숨김없는 솔직함, 진정성 그리고 온전히 상대방을 이해하고 신뢰하는 자세일지 모르겠다. 역시나 밀고 당기는 줄다리기보다는 한 사람만을 위해 진심을 다하고, 온전히 이해하고 사랑할 수 있는 사람이 되어야겠다.</p>
+          <p>컬리야 사랑한다. 이제 고객센터에서 직접 이야기하자.</p>
+                  <button class="essay-fold-btn" onclick="foldEssay(this, event)">접기</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 우리 사이, 최적의 거리? 2020.1.31 -->
+    <article class="essay-item">
+      <div class="essay-header">
+        <div class="essay-title-group">
+          <h2 class="essay-title">우리 사이, 최적의 거리?</h2>
+          <p class="essay-date">2020. 1. 31.</p>
+        </div>
+        <div class="essay-toggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+      </div>
+      <div class="essay-body-wrap">
+        <div class="essay-body">
+          <p>자 제가 잠시 돌아왔습니다. 저는 잘 지내고 있습니…따흑 그럴 리가 없잖아요. 세상에 존재하는 모든 욕설과 비속어를 이 글에 담고 싶은 심정이지만, 거룩한 인류애적 관용을 담아 저 인간들도 사람이야..라는 생각으로 하루하루를 버티고 있습니다. 에헴 제 창작혼을 불태워 많은 감정과 생각을 기록하고 있습니다.(기대하세요.) 창작의 어머니는 모방도 창조도 아닌 감옥이라는 아무개의 말이 떠오르네요. 그러면서, 저는 '과연 편지를 써야 하는 사이란 무엇인가?'라는 질문에 한참을 고심했습니다.</p>
+          <p>왜냐, 사실 누군가의 편지가 저에게 아주 큰 힘이 된다는 것은 부정할 수 없는 사실이나, 세상의 논리에 따르면 내가 원하는 것만을 남에게 요구하는 것은 이치를 거스르는 행동이기 때문입니다. 쇼펜하우어의 '고슴도치 딜레마'처럼 스스로의 자립과 상대에 대한 의존, 두 가지 욕망이 충돌하는 것이죠. 그냥 '야 편지 내놔'라고 맘 편히 직언하고 싶지만 그러지 못하는 이유가 여기에 있습니다.</p>
+          <p>그래서 사실 제 머릿속에 생각이 나는 이름 몇몇을 호명하고 싶었지만(작성의 의무가 있으신 분들^)…너무 많기도 하고 인권 보호 차원에서 생각을 조금 바꿨습니다. 제 텍스트를 보고 '저 새끼가 내 이름을 호명하지 않을까?'라는 생각이 든다면, 바로 당신은 저에게 '편지를 써야 하는 사이'입니다.(사실, 생각이 나지 않은 분들도 열렬히 환영합니다…아니 부탁..)</p>
+          <p>민법 시간에 배웠는데, 일반적으로 채권의 소멸시효(권리를 행사할 수 있는 기간)는 10년입니다. 하지만, 당신들의 편지는 소멸시효가 없습니다. 편지 하나로 저에게 평생토록 '갑'이 될 수 있는 권리를 놓치지 마세요! 제가 생각보다는 의리로 충만한 사람이거든요. 물리적으로 측량할 수 없지만 마음이 담긴 글, 한 마디는 저에게 참 큰 힘이 될 거 같네요. 사실 저에게는 우리 사이의 최적의 거리보다는 우리 사이의 진심이 더 중요하거든요.</p>
+          <p>가기 전에 건강 잘 챙기자는 말을 참 많이 들었는데 그 말이 맞네요. 다들 건강하세요. 저는 20000.</p>
+          <p>아 몰라, 편지 내놔. 20.01.31</p>
+                  <button class="essay-fold-btn" onclick="foldEssay(this, event)">접기</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 서울행 1 2020.1.2 -->
+    <article class="essay-item">
+      <div class="essay-header">
+        <div class="essay-title-group">
+          <h2 class="essay-title">서울행 1</h2>
+          <p class="essay-date">2020. 1. 2.</p>
+        </div>
+        <div class="essay-toggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+      </div>
+      <div class="essay-body-wrap">
+        <div class="essay-body">
+          <p>구미로 귀향한 후, 그 어느 때 보다 화목하던 우리 가정의 평화는 바람 위 등불처럼 위태로워졌다. 우리 부모님은 가정의 필요적 역할만을 강조하셨다. 즉, 느슨한 관계를 지향하며 서로에게 개인적 삶을 존중해주자는 취지이다. 평소 고향에 자주 내려가도 '그만 와라'라는 말을 되풀이하실 뿐, 우리 가족에게 살갑게 '우리 아들 왔어'라고 말하는 것은 영화 속의 픽션일 뿐이었다.</p>
+          <p>집안의 사정은 이러했다. 동생은 학교 졸업 후 일을 시작하기 전까지 잠시 쉬는 중이었고(백수1), 아버지는 농한기를 맞아 내년 봄을 위해 잠시 재충전의 시간을 가졌으며(백수2), 나는 성스러운 나라의 부름을 오매불망 기다리고 있었다(백수3). 그렇다, 각자의 사정이 중첩되어 약 5년 만에 우리 식구 4명이 한집에 장기투숙?하게 되었다. 그러는 동안, 인간은 같이 살면 싸운다는 인류의 자명한 이치 앞에 우리 가족 또한 절대 자유로울 수 없었다.</p>
+          <p>하지만 갑작스러운 기생충들의 습격 이전에, 어머니는 양육과 내조로 보낸 지난 20년의 세월을 뒤로하고, 그야말로 인생의 전성기를 보내시며 솔로 라이프를 즐기셨다. 하지만, 기생충들의 급속한 습격은 어머니의 심기를 불편하게 만들었다. 속세에 모든 미련을 버렸다듯, 쿨하게 집안의 경제권을 어머니에게 넘기고 떠난 아버지는 폐위 직전의 고종처럼 엄마 눈치보기 바빴으며 (낭만의 귀농은 미디어의 허상입니다 여러분)동생은 곧 터질지도 모르는 가정의 위기를 예견한듯 부산으로 도주했다.(동생은 참 이런 면에서 눈치가 빠르다)</p>
+          <p>물론, 나는 입대로 인해 약간의 면책권이 있긴 했다. 어머니는 나를 군대에 보내며 걱정하시기보다는 내가 개고생할 생각을 즐기시며 나에게 약간의 연민을 보내주셨지만, 이러한 면책권은 이내 금방 소멸되고 말았다.</p>
+          <p>결국, 나와 아버지는 백두산 4차 폭발을 막고 국민의 안전과 가정의 평화를 지켜낸 이병헌, 하정우 콤비처럼 이 문제를 슬기롭게 해결해나가기는 무슨, 아버지는 괜히 엄마한테 받은 눈치를 애꿎은 나에게 풀었으며 그 아버지의 그 아들인 우리 부자의 특성상 나 또한 맞불을 놓으며 으르렁거렸다.</p>
+          <p>기생충들의 쓸데없는 분쟁은 이제껏 가만히 방관하며 참고 있던 숙주의 인내심을 폭발시켰고, 급격한 위기감 속에 결국 나는 핸드폰 앱을 켜 가장 빠른 서울행 기차를 예매했다.</p>
+          <p>다음 날, 나는 서울로 향하는 기차에 몸을 실었다.</p>
+          <p>1편 끝</p>
+                  <button class="essay-fold-btn" onclick="foldEssay(this, event)">접기</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 하와이는 말이지요 2019.7.10 -->
+    <article class="essay-item">
+      <div class="essay-header">
+        <div class="essay-title-group">
+          <h2 class="essay-title">하와이는 말이지요</h2>
+          <p class="essay-date">2019. 7. 10.</p>
+        </div>
+        <div class="essay-toggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+      </div>
+      <div class="essay-body-wrap">
+        <div class="essay-body">
+          <p>오오오, 아름다운 무승부여!…(중략)…누구도 이 우주를 이겨서도, 져서도 안된다는 것을. 해변으로 파도가 밀려왔다가 물러가듯이, 혹은 바람에 풀들이 땅에 닿을 듯 쓰러졌다가 다시 일어나듯이. &lt;원더보이 중&gt;</p>
+          <p>무승부, 사실 하와이에서 한 게 없어서 뭐랄까 일반적인 방문기?랄께 없다.진짜 한 게 없다. 하루종일 기면증 환자처럼 누워서 잤으며 일어나서 하는 거라곤 핸드폰, 담배, 콜라가 끝이었다. 그렇다. 난 하와이에서 평생 다시는 해보지 못할 나태의 끝을 경험했다.</p>
+          <p>그렇게 하루하루를 낭비?하던 중 딱 한 달 즈음 되던 날에, 갑자기 집에 가고 싶어졌다. 약간 무섭더라. 그렇게 고대하고 원하던 삶이었는데, 난 거기에 또 지친 것이다.</p>
+          <p>결국 인생은(적어도 내가 생각하기에는..) 버텨야하는데, 잘 버티기위해서는 균형이 중요한 것 같다. 즉, 실패의 압박과 부담감에 쫓기는 23살 5수생의 삶도, 모두의 부러움을 받는 하와이 백수의 삶도, 우리 인생에서 두 가지 모두가 필요하다. 바쁨이 계속되면 압박이 되고, 안일함이 지속되면 나태가 된다. 그 사이를 집요하게 파고들어야 한다. 그래야 삶이란 여정을 권태 없이 버틸 수 있다</p>
+                  <button class="essay-fold-btn" onclick="foldEssay(this, event)">접기</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 그러니깐 내 마음은요 2019.6.20 -->
+    <article class="essay-item">
+      <div class="essay-header">
+        <div class="essay-title-group">
+          <h2 class="essay-title">그러니깐 내 마음은요</h2>
+          <p class="essay-date">2019. 6. 20.</p>
+        </div>
+        <div class="essay-toggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+      </div>
+      <div class="essay-body-wrap">
+        <div class="essay-body">
+          <p>고등학교 때, 친구가 지어준 별명이 있는데 '3초 사과'였다. 말인즉슨, 나는 잘못하거나 미안한 일이 생기면 뒤도 안돌아 보고 바로 사과부터 하는 습관이있다.</p>
+          <p>사실 이 부분은 다분히 긍정적인 요소일 수 있다. 그만큼 솔직하게 인정할 거는 인정하고, 괜한 똥고집 안 부린다는 반증이기도 하니깐 말이다. 하지만 문제의 요는 지금부터다.</p>
+          <p>3대 째 내려오는 성골 사과 농사꾼인 아빠의 피를 물려받아서인지는 모르겠으나, 그간 나를 거쳐간? 여러 지인들의 평가로는 내 사과는 너무 남용되어 왔다. 다시 말해, 맥락상 내가 전혀 미안해 하지 않아도 될 상황에서도 나는 그런 상황 자체가 내 잘못이나, 실수로 인한 것이라고 생각한다는 거다.</p>
+          <p>한편, 오늘은 대망의 첫 번째 시험 성적 발표날이었다. 뭐 평소와 별다를 것 없이 시험지를 받으려는 찰나, 바로 그때였다. 평소 사포보다 까칠한 교수님의 시니컬한 성격탓에 사실 표정으로는 굉장히 평온한척했으나 속으로는 존나 긴장하고 있었다. 괜히 뭐라 한마디 하실까봐. 그런데 시험지를 나눠주시면서 갑자기"45점, 야 넌 근데 왜 중간고사랑 점수가 같냐?"라고 물으셨다. '내 처참한 중간,기말 성적이 같은 것은 무슨 이유일까나, 아니면 두 점수간의 통계적 인과 관계라도 지금 이 자리에서 밝히라는 것일까나', 순간이지만 많은 생각이 스쳐 지나갔다.</p>
+          <p>그러다 결국 내가 내린 결론은 이렇다.</p>
+          <p>나는 순간 과거의 기억을 반추하며 솔직하게 용기를 내어'아니 그걸 왜 나한테 물어요?낸들 알겠습니까?참나'라고 말하지 못하고...생각만했다 생각만..당연히 내 입에 나온 말은 "죄송합니다"였다. 과연 교수님의 물음에 나는 사과를 했어야 했는가, 왜 했을까? 그 후 교수님은 씁쓸한 웃음을 지으시며 더이상 할 말이 없다는 듯 성적을 알려주셨다.</p>
+          <p>아참, 시험 성적은 씨쁠이었다. 엄마 미안.</p>
+                  <button class="essay-fold-btn" onclick="foldEssay(this, event)">접기</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 변절자 2019.3.11 -->
+    <article class="essay-item">
+      <div class="essay-header">
+        <div class="essay-title-group">
+          <h2 class="essay-title">변절자</h2>
+          <p class="essay-date">2019. 3. 11.</p>
+        </div>
+        <div class="essay-toggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+      </div>
+      <div class="essay-body-wrap">
+        <div class="essay-body">
+          <p>이번 에피소드는 그 남자, 성종환이다. 이 남자에 대한 이야기는 사실 너무나 많아서 뭘 적어야 할지 상당한 고민이 있었지만, 마침 TV를 보던 중에 나온 'JTBC 신년 토론'의 훈훈한 엔딩 장면을 보며 끄적인다.</p>
+          <p>정치에 관심이 별로 없다. 평소 '우리 조국의 미래는 없다'라는(특정인 비판 아님) 비관적인 생각과 더불어, 정치 뉴스만 나오면 1년 치 욕을 몰아서 하시는 아버지의 모습이 싫어 나는 평소 까다로운 현실을 무시하고 애써 외면했다.</p>
+          <p>그럼에도 '썰전'은 매우 좋아했다. 논객 개인의 정치적 성향을 떠나, 죽을 것 같이 논쟁하다가도 끝나면 멋있게 악수하고 마무리하는 페어플레이 정신이 참 마음에 들었다(그게 진의인지는 나도 모르지만).</p>
+          <p>아무튼 정치 이야기는 제쳐두고, 사실 종환이의 잔혹한 별명이 하나 있는데 바로 '변절자'이다. 이름만 들으면 무슨 숨겨진 친일파 자손으로 착각할 수도 있지만(절대 아님), 그에게 이러한 별명이 부여된 이유가 있다.</p>
+          <p>그는 이상하게 특정 포인트에서 자신의 벅차오르는 감정을 주체하지 못하곤 했다. 그게 좋은 쪽이든 나쁜 쪽이든 둘 다. 예를 들어, 한 번은 갑자기 잘 운영되고 있던 축구팀을 나가겠다고 선언한 적이 있다. 지금 생각해 보면 그냥 촌동네 조기 축구회였지만, 그때는 나름 학창 시절의 자부심을 영혼까지 갈아 넣은 상징적인 존재였다. 더군다나 그가 탈퇴를 선언한 이유는 팀원에 대한 문제도, 팀에 대한 불만도 아닌 '새로운 도전'이었다.</p>
+          <p>'새로운 도전', 이 말은 사실 예를 들자면 손흥민이 레알 마드리드로 이적할 때 정도의 무게감에나 어울리는 말이지, 촌동네 급식들의 조기 축구단 이적에 어울리는 말은 아닌 것 같았다. 각고의 만류에도 불구하고 그는 그 '도전'을 강행했다. 물론 그가 이적한 그 팀은 후에 공중분해되었지만.</p>
+          <p>그 후에도 그는 가끔 주체되지 않는 감정을 참지 못하고 '새로운 도전'을 강행하기도 했으며, 그때마다 주로 카카오톡 단체 톡에는 '알 수 없음님이 퇴장하셨습니다'라는 멘트가 동반되었다. 도전과 카톡 탈퇴의 공변성은 어떤 이유인지 잘 모르겠으나.</p>
+          <p>뭐, 때마다의 도전은 대개 실패했으며 그는 몇 달 뒤 '안녕 ㅎㅎ 잘 지냈나?'라는 어색한 카톡과 함께 단체 톡에 합류하곤 했다.</p>
+          <p>우리는 그 '변절'이 더 이상 낯설지 않게 되었고, 여전히 나는 그를 '변절자'라고 가끔 놀린다.</p>
+          <p>그의 몇 번의 변절은 앞선 에피소드에서 밝힌 우정의 '위기'에 대한 원인으로 작용할 뻔했으나, 우리는 당장 손절할 듯이 열성적으로 다투다가도 결국 몇 달 뒤 토론이 끝나면 웃으며 악수하는 '썰전' 논객들처럼 실실 쪼개면서 다시 만났다.</p>
+          <p>오랜만에 구미에 내려와서 처음 만난 사람이 얘다. 건우랑 별거하고 다시 만났을 때처럼, 어제도 뭐 그냥… 오랜만에 만난 사람은 고사하고 너무 익숙해서 약간 징그러웠다. 다만 요즘은 이두박근의 무게에 좀 더 많은 관심을 가지는 것 같지만(찐헬창), 내가 봤던 사람들 중에 양심의 무게가 누구보다 무거운 사람이며, 일탈은 했어도 탈선은 하지 않는 단단한 사람이다.</p>
+          <p>끝.</p>
+                  <button class="essay-fold-btn" onclick="foldEssay(this, event)">접기</button>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+</div>
+
+<script>
+function toggleEssay(item) {
+  const wrap = item.querySelector('.essay-body-wrap');
+  const isOpen = item.classList.contains('open');
+
+  if (isOpen) {
+    wrap.style.maxHeight = wrap.scrollHeight + 'px';
+    requestAnimationFrame(() => {
+      wrap.style.maxHeight = '0';
+    });
+    item.classList.remove('open');
+  } else {
+    wrap.style.maxHeight = wrap.scrollHeight + 'px';
+    item.classList.add('open');
+    wrap.addEventListener('transitionend', function handler() {
+      if (item.classList.contains('open')) {
+        wrap.style.maxHeight = 'none';
+      }
+      wrap.removeEventListener('transitionend', handler);
+    });
+  }
+}
+
+function foldEssay(btn, event) {
+  event.stopPropagation();
+  const item = btn.closest('.essay-item');
+  const wrap = item.querySelector('.essay-body-wrap');
+  wrap.style.maxHeight = wrap.scrollHeight + 'px';
+  requestAnimationFrame(() => {
+    wrap.style.maxHeight = '0';
+  });
+  item.classList.remove('open');
+  item.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Only header triggers open
+document.querySelectorAll('.essay-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const item = header.closest('.essay-item');
+    if (!item.classList.contains('open')) {
+      toggleEssay(item);
+    }
+  });
+});
+
+// Toggle icon closes when open
+document.querySelectorAll('.essay-toggle').forEach(toggle => {
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const item = toggle.closest('.essay-item');
+    toggleEssay(item);
+  });
+});
+</script>
+
+</body>
+</html>
 
